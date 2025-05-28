@@ -1,6 +1,6 @@
 {
-	"name": "node-php",
-	"version": "8.3.14.0",
+	"name": "node-php-x",
+	"version": "8.314.0",
 	"description": "",
 	"type": "module",
 	"publishConfig": {
@@ -11,10 +11,6 @@
 		"bin"
 	],
 	"scripts": {
-		"format": "prettier ./**/*.{js,jsx,tx,tsx} --write",
-		"lib": "tsc -outDir lib --target es5",
-		"es": "tsc -outDir es --target es2024",
-		"build": "pnpm run lib && pnpm run es"
 	},
 	"keywords": [
 		"php",
@@ -23,8 +19,6 @@
 	"author": "wangzhen",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^22.10.1",
-		"execa": "^9.5.2",
-		"prettier": "3.4.2"
+		"prettier": "3.5.3"
 	}
 }
