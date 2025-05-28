@@ -1,6 +1,6 @@
 {
 	"name": "node-php-x",
-	"version": "8.314.0",
+	"version": "8.102.0",
 	"description": "",
 	"type": "module",
 	"publishConfig": {
