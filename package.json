@@ -1,6 +1,6 @@
 {
 	"name": "node-php-x",
-	"version": "8.314.0",
+	"version": "8.314.1",
 	"description": "",
 	"type": "module",
 	"publishConfig": {
@@ -19,6 +19,6 @@
 	"author": "wangzhen",
 	"license": "MIT",
 	"devDependencies": {
-		"prettier": "3.5.3"
+		"prettier": "3.6.2"
 	}
 }
