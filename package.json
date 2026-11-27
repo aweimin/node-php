@@ -1,6 +1,6 @@
 {
 	"name": "node-php-x",
-	"version": "8.3.2",
+	"version": "8.3.3",
 	"description": "",
 	"phpVersion": "8.3.14",
 	"type": "module",
@@ -43,6 +43,6 @@
 		"prettier": "3.10.1"
 	},
 	"optionalDependencies": {
-		"@node-php-x/win32-x64": "8.3.2"
+		"@node-php-x/win32-x64": "8.3.3"
 	}
 }

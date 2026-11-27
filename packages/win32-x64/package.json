@@ -1,6 +1,6 @@
 {
 	"name": "@node-php-x/win32-x64",
-	"version": "8.3.2",
+	"version": "8.3.3",
 	"description": "Windows x64 PHP binary for node-php-x",
 	"phpVersion": "8.3.14",
 	"os": [
