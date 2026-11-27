@@ -72,7 +72,7 @@ jobs:
 
             # 7. Publish main package last
             # 线上 latest 为 8.314.1（旧命名规则），高于当前 8.3.x，npm 不允许低版本
-            # 自动占用 latest，故用 --tag next 发布；用户通过 @next 安装新架构版本
+            # 自动占用 latest，故用 --tag next 发布；下一步再显式把 latest 指向当前版本
             - name: Publish main package
               run: |
                   VERSION=$(node -p "require('./package.json').version")
@@ -81,4 +81,18 @@ jobs:
                     echo "$NAME@$VERSION already published, skipping"
                   else
                     npm publish --provenance --tag next
+                  fi
+
+            # 8. Point latest at the current version (new architecture)
+            # npm 拒绝低版本自动占用 latest，但允许手动 dist-tag add 把它指向任意已发布版本。
+            # 需要在 npmjs.com 的 trusted publisher 配置里启用 "Allow npm dist-tag"（OIDC 权限独立）。
+            - name: Set latest dist-tag
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  CURRENT=$(npm view "$NAME" dist-tags.latest 2>/dev/null || echo "")
+                  if [ "$CURRENT" = "$VERSION" ]; then
+                    echo "latest already points to $VERSION, skipping"
+                  else
+                    npm dist-tag add "$NAME@$VERSION" latest
                   fi
