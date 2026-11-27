@@ -1,6 +1,6 @@
 {
 	"name": "node-php-x",
-	"version": "8.3.6",
+	"version": "9.3.1",
 	"description": "",
 	"phpVersion": "8.3.37",
 	"type": "module",

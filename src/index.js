@@ -23,7 +23,7 @@ export function php(...args) {
 /**
  * 获取内置 PHP 的版本信息。
  *
- * @returns {string} 例如 "PHP 8.3.14 (cli) (built: ...) (ZTS ...)"
+ * @returns {string} 例如 "PHP 8.3.37 (cli) (built: ...) (ZTS ...)"
  */
 export function version() {
 	const { stdout, stderr, status } = php('-v');
