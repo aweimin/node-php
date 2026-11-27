@@ -17,13 +17,13 @@ jobs:
         steps:
             # 1. Checkout
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             # 2. Setup Node.js
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               with:
-                  node-version: 24
+                  node-version: '24'
 
             # 3. OIDC trusted publishing 需要 npm >= 11.5.1，Node 24 自带的 npm 可能偏旧
             - name: Upgrade npm CLI
@@ -58,10 +58,41 @@ jobs:
               run: npm pack --dry-run
 
             # 6. Publish platform packages first (so the main package resolves them)
+            # 若版本已存在则跳过（例如重试流程时子包已发布成功），避免重复发布报错
             - name: Publish win32-x64 binary package
               working-directory: packages/win32-x64
-              run: npm publish --provenance --access public
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+                    echo "$NAME@$VERSION already published, skipping"
+                  else
+                    npm publish --provenance --access public
+                  fi
 
             # 7. Publish main package last
+            # 线上 latest 为 8.314.1（旧命名规则），高于当前 8.3.x，npm 不允许低版本
+            # 自动占用 latest，故用 --tag next 发布；下一步再显式把 latest 指向当前版本
             - name: Publish main package
-              run: npm publish --provenance
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+                    echo "$NAME@$VERSION already published, skipping"
+                  else
+                    npm publish --provenance --tag next
+                  fi
+
+            # 8. Point latest at the current version (new architecture)
+            # npm 拒绝低版本自动占用 latest，但允许手动 dist-tag add 把它指向任意已发布版本。
+            # 需要在 npmjs.com 的 trusted publisher 配置里启用 "Allow npm dist-tag"（OIDC 权限独立）。
+            - name: Set latest dist-tag
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  CURRENT=$(npm view "$NAME" dist-tags.latest 2>/dev/null || echo "")
+                  if [ "$CURRENT" = "$VERSION" ]; then
+                    echo "latest already points to $VERSION, skipping"
+                  else
+                    npm dist-tag add "$NAME@$VERSION" latest
+                  fi

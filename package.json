@@ -1,6 +1,6 @@
 {
 	"name": "node-php-x",
-	"version": "8.3.1",
+	"version": "8.3.4",
 	"description": "",
 	"phpVersion": "8.3.14",
 	"type": "module",
@@ -18,6 +18,15 @@
 	"bin": {
 		"php": "bin/index.js"
 	},
+	"devEngines": {
+		"packageManager": [
+			{
+				"name": "pnpm",
+				"version": "12.18.0",
+				"onFail": "ignore"
+			}
+		]
+	},
 	"scripts": {
 	},
 	"keywords": [
@@ -26,10 +35,14 @@
 	],
 	"author": "wangzhen",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aweimin/node-php.git"
+	},
 	"devDependencies": {
 		"prettier": "3.10.1"
 	},
 	"optionalDependencies": {
-		"@node-php-x/win32-x64": "8.3.1"
+		"@node-php-x/win32-x64": "8.3.4"
 	}
 }
