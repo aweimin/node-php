@@ -1,14 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-
-const srcDir = path.dirname(fileURLToPath(import.meta.url));
-const phpBin = path.resolve(
-  srcDir,
-  '..',
-  'php',
-  process.platform === 'win32' ? 'php.exe' : 'php',
-);
+import { phpBin } from './platform.js';
 
 /**
  * 执行一条 PHP 命令，返回结构化结果。

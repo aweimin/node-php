@@ -11,6 +11,12 @@ importers:
       prettier:
         specifier: 3.10.1
         version: 3.10.1
+    optionalDependencies:
+      '@node-php-x/win32-x64':
+        specifier: 8.3.1
+        version: link:packages/win32-x64
+
+  packages/win32-x64: {}
 
 packages:
 

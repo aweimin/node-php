@@ -1,0 +1,5 @@
+packages:
+  - "packages/*"
+
+# 本地开发时链接 workspace 内的平台子包（而非从 registry 拉取）
+linkWorkspacePackages: true

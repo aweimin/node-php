@@ -1,0 +1,28 @@
+{
+	"name": "@node-php-x/win32-x64",
+	"version": "8.3.1",
+	"description": "Windows x64 PHP binary for node-php-x",
+	"phpVersion": "8.3.14",
+	"os": [
+		"win32"
+	],
+	"cpu": [
+		"x64"
+	],
+	"type": "module",
+	"main": "index.js",
+	"exports": {
+		".": "./index.js"
+	},
+	"files": [
+		"php",
+		"index.js"
+	],
+	"keywords": [
+		"php",
+		"node-php-x",
+		"win32"
+	],
+	"author": "wangzhen",
+	"license": "MIT"
+}

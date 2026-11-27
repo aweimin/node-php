@@ -38,6 +38,16 @@ php -m                          # 查看已加载扩展
 
 内置的精确 PHP 版本记录在 `package.json` 的 `phpVersion` 字段（当前为 8.3.14），也可通过 `version()` 函数获取。
 
+## 平台支持
+
+PHP 二进制按平台拆分为独立的子包，安装主包时包管理器会根据 `os` / `cpu` 自动只下载匹配的那个：
+
+| 平台 | 子包 |
+|---|---|
+| Windows x64 | `@node-php-x/win32-x64` |
+
+主包本身只有几 KB 的 JS 入口。目前仅支持 Windows x64，其他平台（Linux / macOS）的子包待补充。
+
 ## 说明
 
 - 内置 PHP 8.3.14（Windows x64，ZTS）。
