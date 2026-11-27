@@ -1,0 +1,40 @@
+name: Publish npm Package
+
+on:
+    push:
+        tags:
+            - "v*"
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            # 1. Checkout
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # 2. Setup Node.js
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+
+            # 3. OIDC trusted publishing 需要 npm >= 11.5.1，Node 24 自带的 npm 可能偏旧
+            - name: Upgrade npm CLI
+              run: |
+                  npm install -g npm@latest
+                  npm --version
+
+            # 4. Verify package contents
+            - name: Verify package
+              run: npm pack --dry-run
+
+            # 5. Publish to npm using OIDC
+            - name: Publish to npm
+              run: npm publish --provenance
