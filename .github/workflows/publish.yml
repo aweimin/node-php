@@ -63,5 +63,7 @@ jobs:
               run: npm publish --provenance --access public
 
             # 7. Publish main package last
+            # 线上 latest 为 8.314.1（旧命名规则），高于当前 8.3.x，npm 不允许低版本
+            # 自动占用 latest，故用 --tag next 发布；用户通过 @next 安装新架构版本
             - name: Publish main package
-              run: npm publish --provenance
+              run: npm publish --provenance --tag next
