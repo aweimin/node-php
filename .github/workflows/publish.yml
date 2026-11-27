@@ -31,14 +31,12 @@ jobs:
                   npm install -g npm@latest
                   npm --version
 
-            # 4. Verify version consistency (tag, main package, platform package)
+            # 4. Verify version consistency (tag <-> main package)
+            # 主包与平台子包版本独立：子包只在 PHP 二进制变更时升级，主包纯 JS 改动无需同步子包版本
             - name: Verify versions
               run: |
                   MAIN=$(node -p "require('./package.json').version")
-                  SUB=$(node -p "require('./packages/win32-x64/package.json').version")
-                  echo "main=$MAIN sub=$SUB"
-                  [ "$MAIN" = "$SUB" ] \
-                    || { echo "版本不一致: main=$MAIN sub=$SUB"; exit 1; }
+                  echo "main=$MAIN"
 
                   if [ "${GITHUB_REF#refs/tags/v}" != "$GITHUB_REF" ]; then
                     TAG="${GITHUB_REF#refs/tags/v}"
