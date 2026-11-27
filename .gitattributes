@@ -1,7 +1,7 @@
 # ============================================
-# 1. 全局默认：AUTO
+# 1. 全局默认：文本文件统一使用 LF
 # ============================================
-* text=auto
+* text=auto eol=lf
 
 # ============================================
 # 2. 必须强制 LF 的文件（跨平台兼容）
@@ -34,6 +34,12 @@ Dockerfile text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf
 .gitmodules text eol=lf
+
+# 无扩展名的配置文件（避免被 core.autocrlf 转成 CRLF）
+.editorconfig text eol=lf
+.prettierignore text eol=lf
+.npmrc text eol=lf
+.nvmrc text eol=lf
 
 # 锁文件（避免冲突）
 *.lock text eol=lf
