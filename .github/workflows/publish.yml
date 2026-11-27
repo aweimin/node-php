@@ -58,12 +58,27 @@ jobs:
               run: npm pack --dry-run
 
             # 6. Publish platform packages first (so the main package resolves them)
+            # 若版本已存在则跳过（例如重试流程时子包已发布成功），避免重复发布报错
             - name: Publish win32-x64 binary package
               working-directory: packages/win32-x64
-              run: npm publish --provenance --access public
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+                    echo "$NAME@$VERSION already published, skipping"
+                  else
+                    npm publish --provenance --access public
+                  fi
 
             # 7. Publish main package last
             # 线上 latest 为 8.314.1（旧命名规则），高于当前 8.3.x，npm 不允许低版本
             # 自动占用 latest，故用 --tag next 发布；用户通过 @next 安装新架构版本
             - name: Publish main package
-              run: npm publish --provenance --tag next
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(node -p "require('./package.json').name")
+                  if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+                    echo "$NAME@$VERSION already published, skipping"
+                  else
+                    npm publish --provenance --tag next
+                  fi
