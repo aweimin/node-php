@@ -18,6 +18,15 @@
 	"bin": {
 		"php": "bin/index.js"
 	},
+	"devEngines": {
+		"packageManager": [
+			{
+				"name": "pnpm",
+				"version": "12.18.0",
+				"onFail": "ignore"
+			}
+		]
+	},
 	"scripts": {
 	},
 	"keywords": [

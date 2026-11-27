@@ -17,13 +17,13 @@ jobs:
         steps:
             # 1. Checkout
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             # 2. Setup Node.js
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               with:
-                  node-version: 24
+                  node-version: '24'
 
             # 3. OIDC trusted publishing 需要 npm >= 11.5.1，Node 24 自带的 npm 可能偏旧
             - name: Upgrade npm CLI
