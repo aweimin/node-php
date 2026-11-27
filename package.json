@@ -1,8 +1,8 @@
 {
 	"name": "node-php-x",
-	"version": "8.3.4",
+	"version": "8.3.5",
 	"description": "",
-	"phpVersion": "8.3.14",
+	"phpVersion": "8.3.37",
 	"type": "module",
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org"
@@ -43,6 +43,6 @@
 		"prettier": "3.10.1"
 	},
 	"optionalDependencies": {
-		"@node-php-x/win32-x64": "8.3.4"
+		"@node-php-x/win32-x64": "8.3.5"
 	}
 }
