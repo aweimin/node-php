@@ -43,6 +43,6 @@
 		"prettier": "3.10.1"
 	},
 	"optionalDependencies": {
-		"@node-php-x/win32-x64": "8.3.5"
+		"@node-php-x/win32-x64": "^8.3.5"
 	}
 }
